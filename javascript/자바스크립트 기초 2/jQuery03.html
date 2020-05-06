@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#btn1").click(function(){
+                $("#box1").css("background","green");
+                $("#box1").html("박스1");
+            });
+            $("#btn2").click(function(){
+                $("#box2").addClass("box2");
+            });
+            $("#btn3").click(function(){
+                $("#box2").removeClass("box2");
+            });
+            $("#btn4").click(function(){
+                $("img").attr("src","img/game_2.jpg")
+            });
+            $("#btn5").click(function(){
+                $("#box1").addClass("on");
+            });
+        })
+    </script>
+    <style>
+        #box1{width:300px; height:300px;background: red; position: relative; transition: 1s; left: 0;}
+        #box1.on{left:50px;}
+        #box2{width:300px; height:300px;background: blue;}
+
+        .box2{background: orange !important;}
+
+        .accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc; 
+}
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
+    </style>
+</head>
+<body>
+    <div id="box1">box1</div>
+    <button type="button" id="btn1">클릭1</button>
+    <button id="btn5" type="button">클릭5</button>
+    <div id="box2">box2</div>
+    <button type="button" id="btn2">클릭2</button>
+    <button type="button" id="btn3">클릭3</button>
+    <div>
+        <img src="img/game_1.jpg" alt="">
+    </div>
+    <button type="button" id="btn4">클릭4</button>
+</body>
+</html>

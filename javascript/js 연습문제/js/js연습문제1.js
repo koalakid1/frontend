@@ -71,6 +71,7 @@ document.write("<h1> 문제 12번 </h1>");
 
 function Search(){
     keyword = document.querySelector('input[name:search]');
+    
 }
 
 location.href = "https://book.naver.com/search/search.nhn?query=" + keyword;
