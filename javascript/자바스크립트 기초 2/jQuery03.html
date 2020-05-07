@@ -1,63 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $("#btn1").click(function(){
-                $("#box1").css("background","green");
+        $(document).ready(function () {
+            $("#btn1").click(function () {
+                $("#box1").css("background", "green");
                 $("#box1").html("박스1");
             });
-            $("#btn2").click(function(){
+            $("#btn2").click(function () {
                 $("#box2").addClass("box2");
             });
-            $("#btn3").click(function(){
+            $("#btn3").click(function () {
                 $("#box2").removeClass("box2");
             });
-            $("#btn4").click(function(){
-                $("img").attr("src","img/game_2.jpg")
+            $("#btn4").click(function () {
+                $("img").attr("src", "img/game_2.jpg")
             });
-            $("#btn5").click(function(){
+            $("#btn5").click(function () {
                 $("#box1").addClass("on");
             });
+            $("#btn6").on("click", function () {
+                $("#box3").addClass("box3");
+            });
+
+            $(".btn1").click(function () {
+                $(".btn1").parent().next()
+                    .css({ "color": "#f00" });
+            });
+
+            $(".btn2").on({
+                "mouseover focus": function () {
+                    $(".btn2").parent().next()
+                        .css({ "color": "#0f0" });
+                }
+            });
+
+            $(".btn1").click();
+            $(".btn2").trigger("mouseover");
+
+            $("#btn7").on("click", function (e) {
+                e.preventDefault();//다른페이지로 이동을 막는다.
+                $("#txt").css("color", "red");
+            });
+            var count=0;
+            $(window).on("scroll", function () {
+                if ($(this).scrollTop() > 700) {
+                    $("#box3").addClass("bounceInLeft animated");
+                
+                    if(count==0){
+                        $("#box4").append("<button id='btn8'>클릭8</button>");
+                    }
+                    count++;
+                }
+            });
+
+            $(".btn3").on({
+                "mouseover": function () {
+                    $(".txt1")
+                        .css({ "background-color": "yellow" });
+                },
+                "mouseout": function () {
+                    $(".txt1")
+                        .css({ "background": "none" });
+                }
+            });
+
+            $(".btn4").hover(function () {
+                $(".txt2")
+                    .css({ "background-color": "aqua" });
+            }, function () {
+                $(".txt2")
+                    .css({ "background": "none" });
+            });
+
+            $(document).on("keydown",keyEventFnc);
+            function keyEventFnc(e){
+                var direct="";
+                switch (e.keyCode) {
+                    case 37:
+                        direct="LEFT";
+                        break;
+
+                    case 38:
+                        direct="TOP";
+                        break;    
+                    
+                    case 39:
+                        direct="RIGHT";
+                        break; 
+
+                    case 40:
+                        direct="BOTTOM";
+                        break; 
+                    default:
+                        break;
+                }
+                if(direct)
+                    $("#user_id").val(direct);
+            };
+            
+            $("#box4").on("click","#btn8",function(){
+                alert("btn8클릭됨");
+            })
         })
     </script>
+
+    <link rel="stylesheet" href="css/animate.css">
     <style>
-        #box1{width:300px; height:300px;background: red; position: relative; transition: 1s; left: 0;}
-        #box1.on{left:50px;}
-        #box2{width:300px; height:300px;background: blue;}
+        #box1 {
+            width: 300px;
+            height: 300px;
+            background: red;
+            position: relative;
+            transition: 1s;
+            left: 0;
+        }
 
-        .box2{background: orange !important;}
+        #box1.on {
+            left: 50px;
+        }
 
-        .accordion {
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-  transition: 0.4s;
-}
+        #box2 {
+            width: 300px;
+            height: 300px;
+            background: blue;
+        }
 
-.active, .accordion:hover {
-  background-color: #ccc; 
-}
+        .box2 {
+            background: orange !important;
+        }
 
-.panel {
-  padding: 0 18px;
-  display: none;
-  background-color: white;
-  overflow: hidden;
-}
+        #box3 {
+            width: 300px;
+            height: 300px;
+            background: orange;
+        }
+
+        .box3 {
+            opacity: 0 !important;
+        }
+
+        body {
+            height: 10000px;
+        }
+        #box4{
+            width: 300px;
+            height: 300px;
+            background: rgb(97, 171, 173);
+        }
     </style>
 </head>
+
 <body>
+
     <div id="box1">box1</div>
     <button type="button" id="btn1">클릭1</button>
     <button id="btn5" type="button">클릭5</button>
@@ -68,5 +168,27 @@
         <img src="img/game_1.jpg" alt="">
     </div>
     <button type="button" id="btn4">클릭4</button>
+    <div id="box3">box3</div>
+    <button id="btn6" type="button">클릭6</button>
+
+    <p>
+        <button class="btn1">버튼1</button>
+    </p>
+    <p>내용1</p>
+    <p>
+        <button class="btn2">버튼2</button>
+    </p>
+    <p>내용2</p>
+    <a href="http://www.naver.com" id="btn7">클릭7</a>
+    <div id="txt">Text</div>
+
+    <p><button class="btn3">Mouse Over/Mouse Out</button></p>
+    <p class="txt1">내용1</p>
+    <p><button class="btn4">Hover</button></p>
+    <p class="txt2">내용2</p>
+
+    <P><input type="text" id="user_id" name="user_id"></P>
+    <div id="box4"></div>
 </body>
+
 </html>

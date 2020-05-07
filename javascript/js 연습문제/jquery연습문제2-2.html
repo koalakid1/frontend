@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            var scrolltop = $("#menuTop2").offset();
+            $(window).scroll(function(){
+                if($(document).scrollTop() > scrolltop.top){
+                    $("#menuTop2").addClass("fixed");
+                }else{
+                    $("#menuTop2").removeClass("fixed");
+                }
+            })
+        })
+    </script>
+    <style>
+        body{
+            height: 10000px;
+        }
+
+        .fixed{
+            position: fixed;
+            top: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="menuTop1">facebook twitter google++</div>
+    <div id="menuTop2">product | contact | map </div>
+</body>
+</html>
