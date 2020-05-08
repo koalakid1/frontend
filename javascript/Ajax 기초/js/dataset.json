@@ -1,0 +1,16 @@
+[
+    {
+        "id":1,
+        "first_name": "Mariele",
+        "last_name" : "Thornewill",
+        "email" : "aaa@aaa.com",
+        "gender" : "Female"
+    },
+    {
+        "id":2,
+        "first_name": "Kissiah",
+        "last_name" : "Genty",
+        "email" : "bbb@bbb.com",
+        "gender" : "Female"
+    }
+]

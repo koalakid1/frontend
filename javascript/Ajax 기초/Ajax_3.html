@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery.js"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                url: "ajaxDBnew.php",
+                dataType: "xml",
+                success: function (data) {
+                    var $data = $(data).find("product");
+                    if ($data.length > 0) {
+                        var tb = $("<table border='1' />");//table 생성
+                        $.each($data, function (i, o) {
+                            var $name = $(o).find("name").text();
+                            var $price = $(o).find("price").text();
+                            //tr생성 td추가
+                            var row = $("<tr/>").append(
+                                $("<td/>").text($name),
+                                $("<td/>").text($price)
+                            );
+                            //table에 row 추가
+                            tb.append(row);
+                        });
+                        //.wrap에 table추가
+                        $(".wrap").append(tb);
+                    }
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div class="wrap"></div>
+</body>
+
+</html>

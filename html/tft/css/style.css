@@ -20,7 +20,7 @@ h1 img { width:280px; height:auto; filter:drop-shadow(1px 1px 10px #ffffff)}
 header { width:700px; height:100%; opacity: 1; position:fixed; top:0px; left:-420px; background-image: url('../img/back.png');opacity: 0.8; transform:skewX(-40deg); }
 /* linear-gradient(-45deg,#CC6CCE, #CC6CCE, #CC6CCE); */
 /* 1depth*/
-#gnb { 	width:220px; position:absolute; top:150px; right:0px;}
+#gnb { width:220px; position:absolute; top:150px; right:0px;}
 #gnb>li {position:relative; }
 #gnb>li>a { display:block; width:220px; height:50px;opacity: 1; font:bold 18px/3 play; color:rgb(6, 216, 205); box-sizing:border-box; padding-right:40px; text-align:right; filter:drop-shadow(1px 1px 10px #ffffff)}
 #gnb>li.on>a { background-image:url('..`/img/back.png');opacity: 0.8; color:#fff;}
@@ -34,7 +34,7 @@ header { width:700px; height:100%; opacity: 1; position:fixed; top:0px; left:-42
 #gnb ul a { text-align: center; display:block; width:230px; height:40px; background-image:url('../img/back.png'); border-bottom:1px solid #CC6CCE; font:bold 16px/2.5 arial; color:#fff; box-sizing:border-box; padding-left:50px; margin-bottom:3px; transition:all 0.5s; }
 #gnb ul a:hover { background-image:url('../img/back2.png'); filter:drop-shadow(1px 1px 10px #ffffff)}
 #gnb>li.on ul { opacity:0.8; left:205px; top:-10px; }
-#gnb li.on ul a { background-image:url('../img/back2.png'); opacity:0.7; } 
+#gnb li.on ul a { background-image:url('../img/back2.png'); opacity:0.7; }
 
 
 /* sns 버튼 모음*/
@@ -64,11 +64,11 @@ header { width:700px; height:100%; opacity: 1; position:fixed; top:0px; left:-42
 #side .con p:nth-child(1) { bottom:270px; transform: translateX(200px); transition:all  0.4s;}
 #side .con p:nth-child(2) { bottom:160px; transform: translateX(200px); transition:all  0.8s;}
 #side .con p:nth-child(3) { bottom:50px; transform: translateX(200px); transition:all  1.2s;}
-#side:hover .con p { transform:translateX(0px); filter:drop-shadow(1px 1px 10px #ffffff)}	
+#side:hover .con p { transform:translateX(0px); filter:drop-shadow(1px 1px 10px #ffffff)}
 
 /* 자동롤링 버튼*/
 #side .btnContents { width:150px; height:50px; position:absolute;  bottom:40px; left:100px; color:#CC6CCE;	transform:skewX(40deg); }
-#side:hover .btnContents { left:700px; filter:drop-shadow(1px 1px 10px #ffffff)}	
+#side:hover .btnContents { left:700px; filter:drop-shadow(1px 1px 10px #ffffff)}
 .btnContents i { font-size:60px; position:absolute; bottom:0px; right:0px; opacity:1;}
 .btnContents i:nth-child(1) { animation:myani linear 1.5s 0s infinite;}
 .btnContents i:nth-child(2) { animation:myani linear 1.5s 0.5s infinite;}
