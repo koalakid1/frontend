@@ -1,0 +1,9 @@
+Cookie
+: 사용자의 어떤 정보를 사용자 컴퓨터에 저장해서 활용.
+ex) 공지사항, 자동로그인
+=> javascript, jQuery or JSP,PHP,ASP 로 구현
+
+Session
+: 사용자의 어떤 정보를 서버에 저장해서 활용.
+ex) 로그인 처리
+=> JSP,PHP,ASP 로 구현
