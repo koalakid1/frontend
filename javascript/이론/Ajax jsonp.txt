@@ -1,0 +1,5 @@
+Ajax에서는 Cross Domain 불허
+1) 서버에서 허용하면 가능
+헤더에 "access-control-allow-origin: *" 기록
+
+2) 우회기술. JSONP
