@@ -1,39 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="js/jquery.js"></script>
+    <title> Ajax </title>
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
     <script>
-        $(function(){
+        // html에 가상 회원 데이터(json데이터)를 불러와 바인딩(parsing)하기
+        //이 파일은 Golive로 실행이 가능함 cross-domain의 정책에 위배가 안됨
+        //요청하는 클라이언트서버와 보내주는 서버가 같기때문에
+        $(function () {
             $.ajax({
-                url:"ajaxDBnew2.php",
-                dataType : "json",
-                success:function(data){
-                    if(data.length > 0){
-                       var tb=$("<table border = '1' />");
+                // url:"ajaxDB3.php",
+                url: "http://koalakid.dothome.co.kr/ajaxDBnew2.php",
+                dataType: "json",
+                success: function (data) {
+                    if (data.length > 0) {
+                        var tb = $("<tabe />");
 
-                       $.each(data,function(index,item){
-                           var $name = item.name;
-                           var $price = item.price;
-
-                           var row = $("<tr/>").append(
-                                $("<td/>").text($name),
-                                $("<td/>").text($price)
-                           );
-
-                           tb.append(row);
-                       });
-
-                       $(".wrap").append(tb);
+                        // 책에는 for문으로 했지만 jquery스타일이니까 each 문으로 해보기
+                        $.each(data, function (index, item) {
+                            var $name = item.name;
+                            var $price = item.price;
+                            //tr생성, td추가
+                            var row = $("<tr />").append(
+                                $("<td />").text($name),
+                                $("<td />").text($price),
+                            );
+                            tb.append(row);
+                        });
+                        $(".wrap").append(tb);
                     }
                 }
-            })
-        })
+            });
+        });
     </script>
 </head>
+
 <body>
     <div class="wrap"></div>
 </body>
+
 </html>
