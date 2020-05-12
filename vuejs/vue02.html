@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<script>
+    window.onload = function () {
+        var app = new Vue({
+            el: '#app', // 어떤 엘리먼트에 적용을 할 지 정합니다
+            // data 는 해당 뷰에서 사용할 정보를 지닙니다
+            data: {
+                message: '안녕하세요 Vue!',
+                name: '홍길동',
+                number:0,
+            },
+            methods: {
+                increment: function() {
+                    this.number++;
+                },
+                decrement : function(){
+                    this.number--;
+                }
+            }
+        });
+
+        var app2 = new Vue({
+            el: "#app2",
+
+            data: {
+                message: '안녕하세요 Vue!',
+                name: '<i>홍길동</i>',
+                value : 5,
+                result : false,
+                img1 : "img/game_1.jpg",
+                img2 : "img/game_2.jpg",
+                todos:[
+                    { text: 'Vue.js 튜토리얼 작성하기' },
+                    { text: 'Webpack2 알아보기' },
+                    { text: '사이드 프로젝트 진행하기' }
+                ]
+            }
+        });
+    }
+</script>
+
+<body>
+    <div id="app">
+        {{ message }} {{ name }}
+        <br>
+        <input type="text" v-model = "name">
+        <h1>카운터 : {{number}} </h1>
+        <button v-on:click = "increment">증가</button>
+        <button v-on:click = "decrement">감소</button>
+    </div>
+    <div id="app2">
+        <span v-text = "message"></span>
+        <span v-html = "name"></span>
+        <span v-if = "value > 5">5보다 큽니다.</span>
+        <span v-else-if = "value == 5">5입니다.</span>
+        <span v-else>5보다 작습니다.</span>
+        <div>
+            <input type="checkbox" v-model="result">
+            <img v-bind:src="result?img1:img2" alt="">
+        </div>
+        <ul>
+            <li v-for = "todo in todos">{{todo.text}}</li>
+        </ul>
+    </div>
+</body>
+
+</html>

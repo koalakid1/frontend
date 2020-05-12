@@ -1,0 +1,15 @@
+virtual dom
+:컨텐츠의 양이 많고 변경이 빈번할 때 효과적
+
+vue.js 나 angular.js는
+data binding을 이용해서 json데이터의 파싱을 보다 효과적으로 할 수 있다.
+
+angular.js를 사용했더니 생산성이 향상됐다라는 구글내부 보고가 있음.
+
+MEAN Stack
+
+MonggoDB Express Angular.js Node.js
+
+MERN stack
+
+MonggoDB Express React Node.js

@@ -1,0 +1,46 @@
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Vue Router</title>
+  </head>
+  <body>
+
+        <div id='app'>
+            <form action="memberUpdate.jsp">
+                name <input type="text" name="name" v-model="name"><br>
+                address <input type="text" name="address" v-model="address"><br>
+                <input type="submit" value="회원정보수정">
+            </form>
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+            name: "",
+            address: ""
+    },
+      methods: {
+        getData: function(){
+          axios.get('http://pjs.dothome.co.kr/ajaxDB3.php')
+          .then((response)=>{
+            this.name = response.data.name;
+            this.address= response.data.address;
+
+        //    this.data= response.data;
+        })
+          .catch(function(e){
+            console.error(e);
+          })
+        }
+      }
+    });
+    app.getData();
+    </script>
+  </body>
+</html>
+
