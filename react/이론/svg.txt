@@ -1,0 +1,7 @@
+svg(scalar vector graphic)
+=> 웹에서 vector graphic을 구현하는데 사용
+=> vector graphic은 flash, illustrator등에서 사용하는 포맷
+=> 이미지의 확대, 축소시 이미지품질이 떨어지지 않음
+     반대로 gif, jpgm png등은 확대,축소시에 이미지품질이 떨어짐
+=> xml문법을 작성
+* 직접 코딩하기 보다는 illustrator등으로 그려서 svg로 변환함
