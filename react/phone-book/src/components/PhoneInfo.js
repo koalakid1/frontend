@@ -42,7 +42,7 @@ class PhoneInfo extends Component {
     });
   }
 
-  //컴포넌트가 업데이트되면 호출됨
+
   componentDidUpdate(prevProps, prevState) {
     // 여기서는, editing 값이 바뀔 때 처리 할 로직이 적혀있습니다.
     // 수정을 눌렀을땐, 기존의 값이 input에 나타나고,

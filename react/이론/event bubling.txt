@@ -1,3 +1,0 @@
-Event Bubbling
-=> 자식 엘리먼트에서 이벤트가 발생하면 부모 엘리먼트로 이벤트가 확장(Bubbling)
-=> e.stopPropagation()으로 이벤트 버블링을 막을 수 있음.
