@@ -1,22 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
-<script>
-    $(document).ready(function () {
-        $("#intro").keyup(function(){
-            document.log($("#intro").val().length);
-        });
-    });
+<body onload="checkCookies()">    <!-- 맨처음 시작할때 하고싶은 동작 -->
+
+<!-- onclick, onload, onChange -->
+
+<!-- onload -->
+<p id="demo"></p>
+
+<script type="text/javascript">
+
+function checkCookies() {
+    var text = "onload 실행";
+    document.getElementById("demo").innerHTML = text;
+}
+</script>
+
+<!-- onblur : 포커스가 이동했을 때 처리-->
+<form action="#">
+나이:<input type="text" onblur="isRegiNum(this)" size = "3" maxlength = "3">세<br>
+    숫자가 아닌 문자로 입력하면, 포커스를 잃을 때 경고가 표시됩니다.
+</form>
+
+<script type="text/javascript">
+function isRegiNum( obj ) {
+    var str = obj.value;
+
+    /*     숫자가 아닌 뭇자열이 포함된 경우 */
+    if(str.match(/[^0-9]/g)){    //숫자가 아닌 다른 문자를 걸러내는 조건 알파벳이나 다른 문자들도 가능하다. ex) /[^a-z]/g, /[^a-z||A-Z]/g
+        alert("숫자이외의 문자가 포함되어 있습니다.");
+        obj.value = "";
+        return false;
+    }
+
+}
 
 </script>
 
-<body>
-    <textarea name="intro" id="intro" cols="30" rows="10">123</textarea>
-</body>
+<!-- onChange -->
+<form>
+    우편 번호 입력란
+    T:
+    <input type="text" size="5" maxlength="3" onchange="isPostNum(this)">
+    -
+    <input type="text" size="4" maxlength="3" onchange="isPostNum(this)">
+    <br>
+</form>
 
+<script type="text/javascript">
+
+    function isPostNum( obj ) {
+        var str = obj.value;
+        if(str.match(/[^0-9]/g)){
+            alert(str.match(/[^0-9]/g) + "\n\n숫자가 아닌 문자가 포함되어 있습니다.");
+            obj.value="";
+            return false;
+        }
+    }
+
+</script>
+
+<!-- onkeydown -->
+
+<form>
+    <p>입력:<input type="text" onkeydown="func(this.form)"
+            onkeyup="func(this.form)" name="txt" size="40">
+    </p>
+    <p>확인:<input type="text" readonly="readonly" name="copy" size="40"
+            style="background-color: #eee; border: 1 px solid #ccc;">
+    </p>
+
+</form>
+
+<script type="text/javascript">
+function func( frmObj ) {
+    //alert( frmObj.txt.value );
+    //alert( frmObj.elements["txt"].value );
+    frmObj.copy.value = frmObj.txt.value;
+}
+</script>
+
+<!-- onkeydown -->
+<form action="#">
+    <input type="text" name="title">
+</form>
+
+<script type="text/javascript">
+//옛날 방식
+/* document.getElementsByName("title")[0].onkeydown  -- ASCII코드값(모두 대문자)*/
+
+document.getElementsByName("title")[0].onkeypress = function(event){    //대 소문자 구분 가능
+    console.log('keydown - keycode :' + event.keyCode );
+    console.log('keydown - which :' + event.which );
+    }
+
+</script>
+
+
+<!-- onmousedown onmouseup -->
+
+<form action="#">
+<p>
+    이미지 버튼을 마우스로 클릭하면, onmousedown
+    버튼을 떼면, onmouseup이벤트 발생
+</p>
+<p>
+    <input type="image" src="san0.gif"
+        onmousedown="fMouseDown(this)"
+        onmouseup="fMouseUp(this)">
+</p>
+</form>
+
+<script type="text/javascript">
+
+function fMouseDown( obj ) {
+    obj.src = "san1.gif";
+}
+function fMouseUp( obj ) {
+    obj.src = "san0.gif";
+}
+</script>
+
+<!-- onmouseover onmouseout -->
+<form action="#">
+    <input type="image" src="./san0.gif"
+        onmouseover="m_over(this)"
+        onmousedown="m_down(this)"
+        onmouseout="m_out(this)">
+
+</form>
+<script type="text/javascript">
+function m_over(obj) {
+    obj.src="./san2.gif";
+}
+function m_down(obj) {
+    obj.src="./san1.gif";
+}
+function m_out(obj) {
+    obj.src="./san0.gif";
+
+}
+</script>
+</body>
 </html>

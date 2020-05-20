@@ -2,65 +2,220 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-    body{
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    #logo{
-        width: 195px;
-        height: 50px;
-    }
-    img{
-        width: 50px;
-        height: 50px;
-    }
-    input{
-        width: 420px;
-        height: 50px;
-        margin-top: 10px;
-    }
-    #btn{
-        width: 470px;
-        background: #0074E9;
-        color: white;
-        font-size: 17px;
-    }
-    #gg{
-        width: 470px;
-        margin: 0 auto;
-        font-size: 12px;
-    }
-    #line{
-        text-decoration: underline;
-    }
-</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/ce3fb13d84.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .input-container {
+            display: -ms-flexbox;
+            /* IE10 */
+            display: flex;
+            width: 100%;
+            height: 50px;
+            margin-bottom: 15px;
+        }
+
+        .icon {
+            padding: 10px;
+            background: #fafafa;
+            color: #cccccc;
+            min-width: 50px;
+            line-height: 25px;
+            text-align: center;
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #aaaaaa;
+            border-right: none;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border: 2px solid dodgerblue;
+        }
+
+        /* Set a style for the submit button */
+        .btn {
+            background-color: dodgerblue;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        a {
+            color: black;
+        }
+
+
+        .btn:hover {
+            opacity: 1;
+        }
+
+        p{
+            color: red;
+        }
+    </style>
 </head>
+
 <body>
-    <img id="logo" src="img/coopang.png" alt="쿠팡">
-<div id="tie">
 
-    <form action="" method="post">
+    <form action="/action_page.php" style="max-width:500px;margin:auto">
+        <h2><img src="img/coopang.png" alt=""
+                style="width:180px; height:50px; position: relative; left: 150px; margin-bottom: -20px;"></h2>
+        <div class="input-container">
+            <i class="far fa-envelope icon"></i>
+            <input class="input-field" type="text" placeholder="아이디(이메일)" onblur="emailcheck(this)" name="email">
+        </div>
 
-        <div><img src="img/email.png" alt=""><input type="text" name="email"></div><br>
-        <img src="img/password.png" alt=""><input type="password" name="pw" ng-model="text"><br>
-        <img src="img/password.png" alt=""><input type="password" name="pwc"><br>
-        <img src="img/name.png" alt=""><input type="text" name="name"><br>
-        <img src="img/phone.png" alt=""><input type="text" name="phone"><br>
-        <input id="btn" type="submit" value="동의하고 가입하기">
-        <div id="gg">본인은 <strong>만 14세 이상</strong>이며, <span id="line">쿠팡 이용약관</span>,
-            <span id="line">전자금융거래이용약관</span>,
-            <span id="line">개인정보 수집 및 이용</span>,
-            <span id="line">개인정보 제공 내용</span>을
-            확인 하였으며, <strong>동의합니다</strong>.</div>
+        <script>
+            var emailchecker = 0;
+            function emailcheck(obj) {
+                var str = obj.value;
+                var parent = obj.parentNode;
+                if (str == "") {
+                    if (emailchecker == 0) {
+                        parent.insertAdjacentHTML('afterend', '<p id="chemail">이메일을 입력하세요.</p>')
+                        emailchecker++;
+                    }
+                }
+                else {
+                    if (emailchecker == 1) {
+                        emailchecker--;
+                        var remove = document.getElementById("chemail");
+                        remove.remove();
+                    }
+                }
+            }
+        </script>
+
+
+        <div class="input-container">
+            <i class="fas fa-lock icon"></i>
+            <input class="input-field" type="password" placeholder="비밀번호(영문 숫자 특수문자 2가지 이상 6~15자 이내)"
+                onblur="pwcheck(this)" name="pw">
+        </div>
+        <script>
+            var pwchecker = 0;
+            function pwcheck(obj) {
+                var str = obj.value;
+                var parent = obj.parentNode;
+                if (str == "") {
+                    if (pwchecker == 0) {
+                        parent.insertAdjacentHTML('afterend', '<p id="chpw">비밀번호는 6~15자 이내로 입력하셔야 합니다.</p>')
+                        pwchecker++;
+                    }
+                }
+                else {
+                    if (pwchecker == 1) {
+                        pwchecker--;
+                        var remove = document.querySelector("#chpw");
+                        remove.remove();
+                    }
+                }
+
+            }
+        </script>
+
+        <div class="input-container">
+            <i class="fas fa-lock icon"></i>
+            <input class="input-field" type="password" placeholder="비밀번호 확인" onblur="pwcheck2(this)" name="chpw">
+        </div>
+        <script>
+            var pwchecker2 = 0;
+            function pwcheck2(obj) {
+                var str = obj.value;
+                var parent = obj.parentNode;
+                if (str != '') {
+                    if (str == checker2) {
+                        if (pwchecker2 == 1) {
+                            pwchecker2--;
+                            var remove = document.querySelector("#chpw2");
+                            remove.remove();
+                        }
+                    } else {
+                        if (pwchecker2 == 0) {
+                            parent.insertAdjacentHTML('afterend', '<p id="chpw2">비밀번호가 일치하지 않습니다.</p>')
+                            pwchecker2++;
+                        }
+                    }
+                }
+            }
+        </script>
+
+        <div class="input-container">
+            <i class="far fa-user icon"></i>
+            <input class="input-field" type="text" placeholder="이름" onblur="namecheck(this)" name="name">
+        </div>
+        <script>
+            var namechecker = 0;
+            function namecheck(obj) {
+                var str = obj.value;
+                var parent = obj.parentNode;
+                if (str == "") {
+                    if (namechecker == 0) {
+                        parent.insertAdjacentHTML('afterend', '<p id="chname">이름을 정확히 입력하세요.</p>')
+                        namechecker++;
+                    }
+                }
+                else {
+                    if (namechecker == 1) {
+                        namechecker--;
+                        var remove = document.querySelector("#chname");
+                        remove.remove();
+                    }
+                }
+
+            }
+        </script>
+        <div class="input-container">
+            <i class="fas fa-mobile-alt icon"></i>
+            <input class="input-field" type="text" placeholder="휴대폰 번호" onblur="phonecheck(this)" name="phone">
+        </div>
+        <script>
+            var phonechecker = 0;
+            function phonecheck(obj) {
+                var str = obj.value;
+                var parent = obj.parentNode;
+                if (str == "") {
+                    if (phonechecker == 0) {
+                        parent.insertAdjacentHTML('afterend', '<p id="chphone">휴대폰 번호를 정확하게 입력하세요.</p>')
+                        phonechecker++;
+                    }
+                }
+                else {
+                    if (phonechecker == 1) {
+                        phonechecker--;
+                        var remove = document.querySelector("#chphone");
+                        remove.remove();
+                    }
+                }
+            }
+        </script>
+        <button type="submit" class="btn">동의하고 가입하기</button>
+
+        본인은 <Strong>만 14세 이상</Strong>이며, <a href="">쿠팡 이용약관</a>, <a href="">전자금융거래이용약관</a>, <a href="">개인정보 수집 및 이용</a>,
+        <a href="">개인정보 제공 내용</a>을 확인 하였으며, <strong>동의합니다.</strong>
+        <footer style="text-align: center; margin-top: 20px;">©Coupang Corp. All rights reserved.</footer>
     </form>
 
-</div>
-<footer>
-    ©Coupang Corp. All rights reserved.
-</footer>
 </body>
+
 </html>
