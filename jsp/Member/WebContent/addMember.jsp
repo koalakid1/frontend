@@ -1,10 +1,21 @@
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%
-request.setCharacterEncoding("UTF-8");
+	pageEncoding="UTF-8"%>
+<%!
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	String url = "jdbc:oracle:thin:@localhost:1521:myoracle";
+	String uid = "ora_user";
+	String pass = "hong";
+	String sql = "insert into member values(?,?,?,?,?,?)";
 %>
-<jsp:useBean id="member" class="com.saeyan.javabeans.MemberBean"/>
-<jsp:setProperty name="member" property="*"/>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,32 +23,40 @@ request.setCharacterEncoding("UTF-8");
 <title>Insert title here</title>
 </head>
 <body>
-<h2>입력 완료된 회원 정보</h2>
-<table>
-<tr>
-<td> 이름 </td>
-<td><jsp:getProperty name="member" property="name"/></td>
-</tr>
-<tr>
-<td> 아이디 </td>
-<td><jsp:getProperty name="member" property="userid"/></td>
-</tr>
-<tr>
-<td> 별명 </td>
-<td><jsp:getProperty name="member" property="nickname"/></td>
-</tr>
-<tr>
-<td> 비밀번호</td>
-<td><jsp:getProperty name="member" property="pwd"/></td>
-</tr>
-<tr>
-<td> 이메일 </td>
-<td><jsp:getProperty name="member" property="email"/></td>
-</tr>
-<tr>
-<td> 전화번호</td>
-<td><jsp:getProperty name="member" property="phone"/></td>
-</tr>
-</table>
+	<%
+		request.setCharacterEncoding("UTF-8");
+	
+		String name = request.getParameter("name");
+		String userid = request.getParameter("userid");
+		String pwd = request.getParameter("pwd");
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		String admin = request.getParameter("admin");
+		try{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection(url,uid,pass);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, userid);
+			pstmt.setString(3, pwd);
+			pstmt.setString(4, email);
+			pstmt.setString(5, phone);
+			pstmt.setInt(6, Integer.parseInt(admin));
+			
+			pstmt.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+	%>
+	<h3>회원가입완료</h3>
+	<a href="allMember.jsp">전체회원목록</a>
 </body>
 </html>

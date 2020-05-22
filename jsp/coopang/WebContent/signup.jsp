@@ -45,7 +45,7 @@
             outline: none;
         }
 
-        .input-field:focus {
+        .input-container:focus {
             border: 2px solid dodgerblue;
         }
 
@@ -69,15 +69,19 @@
             opacity: 1;
         }
 
-        p{
+        [id*='ch'] {
             color: red;
+        }
+
+        #border {
+            border: 2px red solid;
         }
     </style>
 </head>
 
 <body>
 
-    <form action="/action_page.php" style="max-width:500px;margin:auto">
+    <form action="/action_page.php" style="max-width:500px;margin:auto" name="form1">
         <h2><img src="img/coopang.png" alt=""
                 style="width:180px; height:50px; position: relative; left: 150px; margin-bottom: -20px;"></h2>
         <div class="input-container">
@@ -87,20 +91,48 @@
 
         <script>
             var emailchecker = 0;
+            function isEmail(asValue) {
+                var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+                return regExp.test(asValue);
+            }
+
             function emailcheck(obj) {
                 var str = obj.value;
                 var parent = obj.parentNode;
                 if (str == "") {
                     if (emailchecker == 0) {
+                        if (document.querySelector("#chemail") != null) {
+                            console.log(document.querySelector("#chemail"));
+                            document.querySelector("#chemail").remove();
+                            parent.setAttribute("id", "");
+                        }
                         parent.insertAdjacentHTML('afterend', '<p id="chemail">이메일을 입력하세요.</p>')
                         emailchecker++;
+                        parent.setAttribute("id", "border");
                     }
                 }
                 else {
                     if (emailchecker == 1) {
                         emailchecker--;
                         var remove = document.getElementById("chemail");
+                        parent.setAttribute("id", "");
                         remove.remove();
+                    }
+                    if (isEmail(str)){
+                        if (document.querySelector("#chemail") != null) {
+                            console.log(document.querySelector("#chemail"));
+                            document.querySelector("#chemail").remove();
+                            parent.setAttribute("id", "");
+                        }
+                    }else{
+                        if (document.querySelector("#chemail") != null) {
+                            console.log(document.querySelector("#chemail"));
+                            document.querySelector("#chemail").remove();
+                            parent.setAttribute("id", "");
+                        }
+                        parent.insertAdjacentHTML('afterend', '<p id="chemail">이메일 형식이 올바르지 않습니다.</p>')
+                        emailchecker++;
+                        parent.setAttribute("id", "border");
                     }
                 }
             }
@@ -112,15 +144,33 @@
             <input class="input-field" type="password" placeholder="비밀번호(영문 숫자 특수문자 2가지 이상 6~15자 이내)"
                 onblur="pwcheck(this)" name="pw">
         </div>
+
+
+        <div class="input-container">
+            <i class="fas fa-lock icon"></i>
+            <input class="input-field" type="password" placeholder="비밀번호 확인" onblur="pwcheck2(this)" name="chpw">
+        </div>
         <script>
             var pwchecker = 0;
             function pwcheck(obj) {
                 var str = obj.value;
                 var parent = obj.parentNode;
-                if (str == "") {
+                var checker = document.form1.chpw.value;
+                var num = str.search(/[0-9]/g);
+                var eng = str.search(/[a-z]/ig);
+                var spe = str.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+                if (str.length < 6 || str.length > 15) {
                     if (pwchecker == 0) {
+                        if (document.querySelector("#chpw") != null) {
+                            console.log(document.querySelector("#chpw"));
+                            document.querySelector("#chpw").remove();
+                            parent.setAttribute("id", "");
+                        }
+
                         parent.insertAdjacentHTML('afterend', '<p id="chpw">비밀번호는 6~15자 이내로 입력하셔야 합니다.</p>')
                         pwchecker++;
+                        parent.setAttribute("id", "border");
                     }
                 }
                 else {
@@ -128,32 +178,57 @@
                         pwchecker--;
                         var remove = document.querySelector("#chpw");
                         remove.remove();
+                        parent.setAttribute("id", "");
+                    }
+                    if (str == checker) {
+                        if (pwchecker2 == 1) {
+                            pwchecker2--;
+                            var remove = document.querySelector("#chpw2");
+                            document.form1.chpw.parentNode.setAttribute("id", "");
+                            remove.remove();
+                        }
+                    } else if (checker != "") {
+                        if (pwchecker2 == 0) {
+                            document.form1.chpw.parentNode.insertAdjacentHTML('afterend', '<p id="chpw2">비밀번호가 일치하지 않습니다.</p>')
+                            pwchecker2++;
+                            document.form1.chpw.parentNode.setAttribute("id", "border");
+                        }
+                    }
+                    if (num < 0 || eng < 0 || spe < 0) {
+                        if (document.querySelector("#chpw") != null) {
+                            document.querySelector("#chpw").remove();
+                            parent.setAttribute("id", "");
+                        }
+
+                        parent.insertAdjacentHTML('afterend', '<p id="chpw">영문,숫자,특수문자를 혼합하여 입력해주세요.</p>')
+                        parent.setAttribute("id", "border");
+                    } else {
+                        if (document.querySelector("#chpw") != null) {
+                            document.querySelector("#chpw").remove();
+                            parent.setAttribute("id", "");
+                        }
                     }
                 }
 
             }
-        </script>
-
-        <div class="input-container">
-            <i class="fas fa-lock icon"></i>
-            <input class="input-field" type="password" placeholder="비밀번호 확인" onblur="pwcheck2(this)" name="chpw">
-        </div>
-        <script>
             var pwchecker2 = 0;
             function pwcheck2(obj) {
                 var str = obj.value;
                 var parent = obj.parentNode;
+                var checker2 = document.form1.pw.value;
                 if (str != '') {
                     if (str == checker2) {
                         if (pwchecker2 == 1) {
                             pwchecker2--;
                             var remove = document.querySelector("#chpw2");
                             remove.remove();
+                            parent.setAttribute("id", "");
                         }
                     } else {
                         if (pwchecker2 == 0) {
                             parent.insertAdjacentHTML('afterend', '<p id="chpw2">비밀번호가 일치하지 않습니다.</p>')
                             pwchecker2++;
+                            parent.setAttribute("id", "border");
                         }
                     }
                 }
@@ -173,6 +248,7 @@
                     if (namechecker == 0) {
                         parent.insertAdjacentHTML('afterend', '<p id="chname">이름을 정확히 입력하세요.</p>')
                         namechecker++;
+                        parent.setAttribute("id", "border");
                     }
                 }
                 else {
@@ -180,6 +256,7 @@
                         namechecker--;
                         var remove = document.querySelector("#chname");
                         remove.remove();
+                        parent.setAttribute("id", "");
                     }
                 }
 
@@ -191,20 +268,48 @@
         </div>
         <script>
             var phonechecker = 0;
+            function isPhone1(asValue) {
+                var regExp = /^\d{3}\d{3,4}\d{4}$/;
+                return regExp.test(asValue);
+            }
+            function isPhone2(asValue) {
+                var regExp = /^\d{3}-\d{3,4}-\d{4}$/;
+                return regExp.test(asValue);
+            }
             function phonecheck(obj) {
                 var str = obj.value;
                 var parent = obj.parentNode;
                 if (str == "") {
                     if (phonechecker == 0) {
+                        if (document.querySelector("#chphone") != null) {
+                            document.querySelector("#chphone").remove();
+                            parent.setAttribute("id", "");
+                        }
                         parent.insertAdjacentHTML('afterend', '<p id="chphone">휴대폰 번호를 정확하게 입력하세요.</p>')
                         phonechecker++;
+                        parent.setAttribute("id", "border");
                     }
                 }
                 else {
                     if (phonechecker == 1) {
                         phonechecker--;
                         var remove = document.querySelector("#chphone");
+                        parent.setAttribute("id", "");
                         remove.remove();
+                    }
+                    if(isPhone1(str) || isPhone2(str)){
+                        if (document.querySelector("#chphone") != null) {
+                            document.querySelector("#chphone").remove();
+                            parent.setAttribute("id", "");
+                        }
+                    }else{
+                        if (document.querySelector("#chphone") != null) {
+                            document.querySelector("#chphone").remove();
+                            parent.setAttribute("id", "");
+                        }
+                        parent.insertAdjacentHTML('afterend', '<p id="chphone">휴대폰 번호 형식이 올바르지 않습니다.</p>')
+                        phonechecker++;
+                        parent.setAttribute("id", "border");
                     }
                 }
             }
