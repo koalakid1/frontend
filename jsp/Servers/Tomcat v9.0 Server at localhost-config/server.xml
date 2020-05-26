@@ -110,7 +110,14 @@
 				<Context docBase="Member2" path="/Member2" reloadable="true" source="org.eclipse.jst.jee.server:Member2">
 					<Resource auth="Container" driverClassName="oracle.jdbc.OracleDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/myoracle" password="hong" type="javax.sql.DataSource" url="jdbc:oracle:thin:@127.0.0.1:1521:myoracle" username="ora_user"/>
 				</Context>
-			<Context docBase="item" path="/item" reloadable="true" source="org.eclipse.jst.jee.server:item"/></Host>
+				<Context docBase="item" path="/item" reloadable="true" source="org.eclipse.jst.jee.server:item"/>
+				<Context docBase="Upload" path="/Upload" reloadable="true" source="org.eclipse.jst.jee.server:Upload">
+					<Resource auth="Container" driverClassName="oracle.jdbc.OracleDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/myoracle" password="hong" type="javax.sql.DataSource" url="jdbc:oracle:thin:@127.0.0.1:1521:myoracle" username="ora_user"/>
+				</Context>
+				<Context docBase="Board" path="/Board" reloadable="true" source="org.eclipse.jst.jee.server:Board">
+					<Resource auth="Container" driverClassName="oracle.jdbc.OracleDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/myoracle" password="hong" type="javax.sql.DataSource" url="jdbc:oracle:thin:@127.0.0.1:1521:myoracle" username="ora_user"/>
+				</Context>
+			</Host>
 		</Engine>
 	</Service>
 </Server>
